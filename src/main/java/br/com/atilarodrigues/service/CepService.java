@@ -13,14 +13,13 @@ import java.net.http.HttpResponse;
 
 public class CepService {
 
-    private CepRepository cepRepository;
+    private final CepRepository cepRepository;
 
-    public CepService(CepRepository cepRepository) {
-        this.cepRepository = cepRepository;
+    public CepService() {
+        cepRepository = new CepRepository();
     }
 
     public void getCepRequest(String cep) throws URISyntaxException, IOException, InterruptedException {
-        // Importar CepRepository
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()

@@ -1,39 +1,71 @@
 package br.com.atilarodrigues.repository;
 
 import br.com.atilarodrigues.database.HibernateUtil;
+import br.com.atilarodrigues.exceptions.CepAlreadyStoredException;
 import br.com.atilarodrigues.model.CepModel;
 import org.hibernate.Session;
+
+import java.util.ArrayList;
 
 public class CepRepository {
 
     public static Session session = HibernateUtil.getSessionFactory().openSession();
 
-    public void saveAddress(CepModel cepModel) {
+    public CepModel findAddress(String cep) {
         try {
             session.beginTransaction();
-            session.save(cepModel);
-            session.getTransaction().commit();
-            System.out.println("Endereço salvo com sucesso!");
+            // Find the address by the CEP column
 
-            findAddress(cepModel.getCep());
+            // If the CEP is not found, don't throw an exception
+            CepModel cepModel = session.createQuery("from cep_model where cep = :cep", CepModel.class)
+                    .setParameter("cep", cep)
+                    .getSingleResult();
+
+            return cepModel;
         } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
+            if (e instanceof javax.persistence.NoResultException) {
+                return null;
             }
             e.printStackTrace();
+        } finally {
+            session.getTransaction().commit();
         }
+        return null;
     }
 
-    public void findAddress(String cep) {
+    public ArrayList<CepModel> findAllAddresses() {
         try {
             session.beginTransaction();
-            CepModel cepModel = session.find(CepModel.class, cep);
-            System.out.println(cepModel);
+            ArrayList<CepModel> cepModels = (ArrayList<CepModel>) session.createQuery("from cep_model").list();
+            return cepModels;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             session.getTransaction().commit();
         }
+        return null;
     }
+
+    public CepModel saveAddress(CepModel cepModel) {
+        try {
+            // Verify if the CEP already exists in the database
+            if (findAddress(cepModel.getCep()) != null) {
+                throw new CepAlreadyStoredException();
+            }
+            session.beginTransaction();
+            session.save(cepModel);
+            session.getTransaction().commit();
+            return findAddress(cepModel.getCep());
+        } catch (Exception e) {
+            if (!(e instanceof CepAlreadyStoredException)) {
+                if (session.getTransaction() != null) {
+                    session.getTransaction().rollback();
+                }
+            }
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

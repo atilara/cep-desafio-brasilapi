@@ -76,6 +76,13 @@ public class CepModel {
 
     @Override
     public String toString() {
-        return "{" + "cep='" + cep + '\'' + ", state='" + state + '\'' + ", city='" + city + '\'' + ", neighborhood='" + neighborhood + '\'' + ", street='" + street + '\'' + '}';
+        return "\n{" +
+                "\n\tid='" + id + '\'' +
+                "\n\tcep='" + cep + '\'' +
+                "\n\tstate='" + state + '\'' +
+                "\n\tcity='" + city + '\'' +
+                "\n\tneighborhood='" + neighborhood + '\'' +
+                "\n\tstreet='" + street + '\'' +
+                "\n}";
     }
 }

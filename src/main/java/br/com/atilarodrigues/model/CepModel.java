@@ -1,12 +1,18 @@
 package br.com.atilarodrigues.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
-@Entity
+import javax.persistence.*;
+
+@Entity(name = "cep_model")
 public class CepModel {
 
     @Id
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
+
+    @Column(unique = true)
     private String cep;
 
     private String state;

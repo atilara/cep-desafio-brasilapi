@@ -1,6 +1,6 @@
 package br.com.atilarodrigues.repository;
 
-import br.com.atilarodrigues.database.HibernateUtil;
+import br.com.atilarodrigues.database.MySqlConnect;
 import br.com.atilarodrigues.exceptions.CepAlreadyStoredException;
 import br.com.atilarodrigues.model.CepModel;
 import org.hibernate.Session;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CepRepository {
 
-    public static Session session = HibernateUtil.getSessionFactory().openSession();
+    public static Session session = MySqlConnect.getSessionFactory().openSession();
 
     public CepModel findAddress(String cep) {
         try {

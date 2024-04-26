@@ -6,7 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class HibernateUtil {
+public class MySqlConnect {
 
     private static SessionFactory sessionFactory = buildSessionFactory();
 
@@ -15,7 +15,7 @@ public class HibernateUtil {
             if (sessionFactory == null) {
 
                 Configuration config = new Configuration()
-                        .configure(HibernateUtil.class.getResource("/hibernate.cfg.xml"));
+                        .configure(MySqlConnect.class.getResource("/hibernate.cfg.xml"));
                 config.addAnnotatedClass(CepModel.class);
                 StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
                 serviceRegistryBuilder.applySettings(config.getProperties());

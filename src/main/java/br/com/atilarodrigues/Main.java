@@ -2,12 +2,12 @@ package br.com.atilarodrigues;
 
 import br.com.atilarodrigues.service.CepService;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 public class Main {
-    public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+    public static void main(String[] args) {
         CepService cepService = new CepService();
-        cepService.getCepRequest("50010020");
+        if (args.length > 0) {
+            cepService.saveAddressRequest(args[0]);
+        }
+        System.out.println(cepService.findAllAddresses());
     }
-}
+} 

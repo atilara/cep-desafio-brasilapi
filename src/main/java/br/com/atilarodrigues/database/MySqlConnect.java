@@ -7,6 +7,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.logging.Level;
+
 public class MySqlConnect {
 
     private static SessionFactory sessionFactory = buildSessionFactory();
@@ -14,6 +16,7 @@ public class MySqlConnect {
     private static SessionFactory buildSessionFactory() {
         try {
             if (sessionFactory == null) {
+                java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
                 Dotenv dotenv = Dotenv.load();
                 Configuration config = new Configuration()
                         .configure(MySqlConnect.class.getResource("/hibernate.cfg.xml"));

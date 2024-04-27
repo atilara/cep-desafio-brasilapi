@@ -14,9 +14,7 @@ public class CepRepository {
     public CepModel findAddress(String cep) {
         try {
             session.beginTransaction();
-            // Find the address by the CEP column
 
-            // If the CEP is not found, don't throw an exception
             CepModel cepModel = session.createQuery("from cep_model where cep = :cep", CepModel.class)
                     .setParameter("cep", cep)
                     .getSingleResult();

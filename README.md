@@ -49,6 +49,28 @@ No IntelliJ IDEA, por exemplo, é possível passar argumentos do programa na aba
 
 Caso nenhum argumento seja passado, o programa lista todos os CEPs armazenados no banco.
 
+Os CEPs são listados via console e são impressos com a seguinte formatação:
+
+```json
+[
+{
+        id='063830aa-b8ff-4890-a889-2c150530c1bc'
+        cep='37701207'
+        state='MG'
+        city='Poços de Caldas'
+        neighborhood='Parque Vivaldi Leite Ribeiro'
+        street='Rua Cali'
+},
+{
+        id='efc41b68-5c4d-453c-9510-8e5e181f2dcb'
+        cep='94475612'
+        state='RS'
+        city='Viamão'
+        neighborhood='Cecília'
+        street='Rua José Jorge Mengue'
+}]
+```
+
 ## Como gerar um executável?
 
 ```bash

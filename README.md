@@ -51,7 +51,7 @@ Caso nenhum argumento seja passado, o programa lista todos os CEPs armazenados n
 
 Os CEPs são listados via console e são impressos com a seguinte formatação:
 
-```json
+```
 [
 {
         id='063830aa-b8ff-4890-a889-2c150530c1bc'
